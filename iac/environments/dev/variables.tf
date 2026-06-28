@@ -73,6 +73,7 @@ variable "enable_vpc_endpoints" {
   type    = bool
   default = true
 }
+
 variable "s3_force_destroy" {
   description = "Permitir vaciar buckets S3 al destruir el entorno"
   type        = bool
@@ -90,6 +91,7 @@ variable "s3_backups_noncurrent_days" {
   type        = number
   default     = 90
 }
+
 variable "dynamodb_billing_mode" {
   description = "Modo de facturacion DynamoDB (PAY_PER_REQUEST o PROVISIONED)"
   type        = string
@@ -104,6 +106,66 @@ variable "dynamodb_enable_pitr" {
 
 variable "dynamodb_deletion_protection" {
   description = "Proteccion contra borrado de tabla DynamoDB"
+  type        = bool
+  default     = false
+}
+
+variable "db_password" {
+  description = "Contrasena maestra PostgreSQL (no commitear)"
+  type        = string
+  sensitive   = true
+}
+
+variable "db_engine_version" {
+  description = "Version de PostgreSQL"
+  type        = string
+  default     = "17.7"
+}
+
+variable "db_instance_class" {
+  description = "Clase de instancia RDS"
+  type        = string
+  default     = "db.t4g.medium"
+}
+
+variable "db_allocated_storage" {
+  description = "Almacenamiento inicial RDS en GB"
+  type        = number
+  default     = 20
+}
+
+variable "db_max_allocated_storage" {
+  description = "Maximo autoscaling de almacenamiento RDS (0 = off)"
+  type        = number
+  default     = 100
+}
+
+variable "db_multi_az" {
+  description = "RDS Multi-AZ"
+  type        = bool
+  default     = false
+}
+
+variable "db_backup_retention_period" {
+  description = "Dias de retencion de backups RDS"
+  type        = number
+  default     = 7
+}
+
+variable "db_deletion_protection" {
+  description = "Proteccion contra borrado de RDS"
+  type        = bool
+  default     = false
+}
+
+variable "db_skip_final_snapshot" {
+  description = "Omitir snapshot final al destruir RDS"
+  type        = bool
+  default     = true
+}
+
+variable "db_performance_insights_enabled" {
+  description = "Performance Insights en RDS"
   type        = bool
   default     = false
 }
