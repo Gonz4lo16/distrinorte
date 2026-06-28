@@ -30,6 +30,7 @@ output "ecs_sg_id" {
   description = "Security group de tasks ECS"
   value       = module.security_groups.ecs_sg_id
 }
+
 output "portal_spa_bucket_name" {
   description = "Bucket portal SPA"
   value       = module.s3.portal_spa_bucket_name
@@ -53,4 +54,19 @@ output "products_table_name" {
 output "products_table_arn" {
   description = "ARN tabla DynamoDB products"
   value       = module.dynamodb.products_table_arn
+}
+
+output "db_endpoint" {
+  description = "Endpoint RDS PostgreSQL"
+  value       = module.rds.endpoint
+}
+
+output "db_port" {
+  description = "Puerto RDS PostgreSQL"
+  value       = module.rds.port
+}
+
+output "db_name" {
+  description = "Nombre de la base de datos RDS"
+  value       = module.rds.db_name
 }
