@@ -36,7 +36,7 @@ module "s3" {
   backups_noncurrent_days = var.s3_backups_noncurrent_days
 }
 
-#module "dynamodb" {
+module "dynamodb" {
   source = "../../modules/dynamodb"
 
   project_name = local.project_name
@@ -47,6 +47,37 @@ module "s3" {
   enable_point_in_time_recovery = var.dynamodb_enable_pitr
   deletion_protection           = var.dynamodb_deletion_protection
 }
+
+module "rds" {
+  source = "../../modules/rds"
+
+  project_name = local.project_name
+  environment  = local.environment
+  tags         = local.common_tags
+
+  data_subnet_ids    = module.networking.data_subnet_ids
+  security_group_ids = [module.security_groups.rds_sg_id]
+
+  db_password = var.db_password
+
+  engine_version               = var.db_engine_version
+  instance_class               = var.db_instance_class
+  allocated_storage            = var.db_allocated_storage
+  max_allocated_storage        = var.db_max_allocated_storage
+  multi_az                     = var.db_multi_az
+  backup_retention_period      = var.db_backup_retention_period
+  deletion_protection          = var.db_deletion_protection
+  skip_final_snapshot          = var.db_skip_final_snapshot
+  performance_insights_enabled = var.db_performance_insights_enabled
+}
+
+# module "elasticache" { ... }
+
+# -----------------------------------------------------------------------------
+# Fase 3 — Mensajería
+# -----------------------------------------------------------------------------
+
+# module "messaging" { ... }
 
 # -----------------------------------------------------------------------------
 # Fase 4 — Compute
