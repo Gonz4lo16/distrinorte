@@ -96,12 +96,18 @@ module "messaging" {
   environment  = local.environment
   tags         = local.common_tags
 }
+module "iam" {
+  source = "../../modules/iam"
 
-# -----------------------------------------------------------------------------
-# Fase 4 — Compute
-# -----------------------------------------------------------------------------
+  project_name = local.project_name
+  environment  = local.environment
+  tags         = local.common_tags
 
-# module "iam" { ... }
+  event_bus_arn            = module.messaging.event_bus_arn
+  inventory_work_queue_arn = module.messaging.inventory_work_queue_arn
+  orders_events_queue_arn  = module.messaging.orders_events_queue_arn
+  products_table_arn       = module.dynamodb.products_table_arn
+}
 # module "ecs_cluster" { ... }
 # module "alb" { ... }
 # module "orders_service" { source = "../../modules/ecs-service" ... }
