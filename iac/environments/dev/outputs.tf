@@ -147,3 +147,7 @@ output "customers_target_group_arn" {
   description = "Target group ARN de customers-service"
   value       = module.alb.customers_target_group_arn
 }
+output "customers_service_name" {
+  description = "Nombre del ECS service customers-service"
+  value       = module.customers_service.service_name
+}
