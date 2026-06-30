@@ -190,6 +190,7 @@ output "cognito_issuer_url" {
   description = "Issuer URL para JWT"
   value       = module.cognito.issuer_url
 }
+
 output "api_gateway_invoke_url" {
   description = "URL base del API Gateway stage"
   value       = module.apigateway.stage_invoke_url
@@ -199,6 +200,7 @@ output "api_gateway_rest_api_id" {
   description = "ID del REST API"
   value       = module.apigateway.rest_api_id
 }
+
 output "cloudfront_portal_domain_name" {
   description = "Dominio CloudFront del portal SPA"
   value       = module.cloudfront.portal_distribution_domain_name
@@ -213,6 +215,7 @@ output "cloudfront_assets_domain_name" {
   description = "Dominio CloudFront de imagenes de catalogo"
   value       = module.cloudfront.assets_distribution_domain_name
 }
+
 output "api_gateway_web_acl_id" {
   description = "WAF regional del API Gateway"
   value       = module.waf.api_gateway_web_acl_id
@@ -222,6 +225,7 @@ output "cloudfront_web_acl_id" {
   description = "WAF global asociado a las distribuciones CloudFront"
   value       = module.waf.cloudfront_web_acl_id
 }
+
 output "route53_portal_fqdn" {
   description = "FQDN del portal en Route53"
   value       = try(module.route53_aliases[0].portal_fqdn, null)
@@ -240,4 +244,19 @@ output "route53_assets_fqdn" {
 output "acm_certificate_arn" {
   description = "ARN del certificado ACM CloudFront (us-east-1)"
   value       = local.cloudfront_certificate_arn
+}
+
+output "ecr_repository_urls" {
+  description = "URLs de repositorios ECR"
+  value       = module.ecr.repository_urls
+}
+
+output "seed_runner_task_definition_arn" {
+  description = "ARN de la task definition seed-runner"
+  value       = module.seed_runner_task.task_definition_arn
+}
+
+output "github_actions_role_arn" {
+  description = "Rol OIDC para GitHub Actions"
+  value       = module.iam.github_actions_role_arn
 }
