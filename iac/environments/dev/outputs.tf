@@ -160,3 +160,7 @@ output "orders_service_name" {
   description = "Nombre del ECS service orders-service"
   value       = module.orders_service.service_name
 }
+output "catalog_service_name" {
+  description = "Nombre del ECS service catalog-service"
+  value       = module.catalog_service.service_name
+}
