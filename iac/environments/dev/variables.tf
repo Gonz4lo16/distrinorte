@@ -169,6 +169,7 @@ variable "db_performance_insights_enabled" {
   type        = bool
   default     = false
 }
+
 variable "redis_engine_version" {
   description = "Version de Redis"
   type        = string
@@ -206,6 +207,7 @@ variable "redis_snapshot_retention_limit" {
   type        = number
   default     = 7
 }
+
 variable "cognito_callback_urls" {
   description = "OAuth callback URLs del portal B2B"
   type        = list(string)
@@ -217,6 +219,7 @@ variable "cognito_logout_urls" {
   type        = list(string)
   default     = ["http://localhost:5173/"]
 }
+
 variable "cloudfront_portal_aliases" {
   description = "Aliases CloudFront del portal (requiere ACM us-east-1)"
   type        = list(string)
@@ -234,6 +237,7 @@ variable "cloudfront_assets_aliases" {
   type        = list(string)
   default     = []
 }
+
 variable "cloudfront_acm_certificate_arn" {
   description = "ACM certificate ARN in us-east-1 for CloudFront custom domains"
   type        = string
@@ -252,6 +256,7 @@ variable "waf_cloudfront_rate_limit" {
   type        = number
   default     = 2000
 }
+
 variable "waf_api_gateway_rate_limit" {
   description = "Rate limit WAF API Gateway (requests por IP cada 5 min)"
   type        = number
@@ -299,4 +304,35 @@ variable "route53_assets_record_name" {
   description = "FQDN del CDN de assets"
   type        = string
   default     = "assets.galaxymorph.com"
+}
+
+variable "container_image_tag" {
+  description = "Tag de imagenes ECR para servicios ECS (ej. git SHA o latest)"
+  type        = string
+  default     = "latest"
+}
+
+variable "enable_github_actions_oidc" {
+  description = "Crear proveedor OIDC + rol IAM para GitHub Actions"
+  type        = bool
+  default     = false
+}
+
+variable "github_repository" {
+  description = "Repositorio GitHub owner/repo para OIDC (requerido si OIDC habilitado)"
+  type        = string
+  default     = null
+  nullable    = true
+}
+
+variable "github_oidc_branches" {
+  description = "Branches que pueden asumir el rol OIDC"
+  type        = list(string)
+  default     = ["develop", "production"]
+}
+
+variable "github_actions_attach_power_user" {
+  description = "Adjuntar PowerUserAccess al rol OIDC (terraform apply desde CI)"
+  type        = bool
+  default     = true
 }
