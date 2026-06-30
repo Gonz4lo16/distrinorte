@@ -14,32 +14,60 @@ variable "tags" {
   default     = {}
 }
 
-variable "event_source" {
-  description = "Source de eventos publicados (debe coincidir con packages/events)"
+variable "event_bus_arn" {
+  description = "ARN del custom EventBridge bus"
   type        = string
-  default     = "distrinorte"
 }
 
-variable "message_retention_seconds" {
-  description = "Retencion de mensajes en colas principales"
-  type        = number
-  default     = 345600
+variable "inventory_work_queue_arn" {
+  description = "ARN cola SQS inventory-work"
+  type        = string
 }
 
-variable "dlq_message_retention_seconds" {
-  description = "Retencion de mensajes en DLQs"
-  type        = number
-  default     = 1209600
+variable "orders_events_queue_arn" {
+  description = "ARN cola SQS orders-events"
+  type        = string
 }
 
-variable "visibility_timeout_seconds" {
-  description = "Visibility timeout de las colas (>= tiempo maximo de procesamiento del consumer)"
-  type        = number
-  default     = 60
+variable "products_table_arn" {
+  description = "ARN tabla DynamoDB products"
+  type        = string
 }
 
-variable "max_receive_count" {
-  description = "Recepciones antes de enviar mensaje a DLQ"
-  type        = number
-  default     = 5
+variable "catalog_images_bucket_arn" {
+  description = "ARN bucket S3 de imagenes de catalogo (seed-runner)"
+  type        = string
+  default     = null
+  nullable    = true
+}
+
+variable "github_repository" {
+  description = "Repositorio GitHub owner/repo para OIDC (ej. org/distrinorte)"
+  type        = string
+  default     = null
+  nullable    = true
+}
+
+variable "enable_github_actions_oidc" {
+  description = "Crear rol IAM OIDC para GitHub Actions"
+  type        = bool
+  default     = false
+}
+
+variable "github_oidc_branches" {
+  description = "Branches permitidos para asumir el rol OIDC"
+  type        = list(string)
+  default     = ["develop", "production"]
+}
+
+variable "github_actions_attach_power_user" {
+  description = "Adjuntar PowerUserAccess al rol OIDC (terraform apply en dev)"
+  type        = bool
+  default     = true
+}
+
+variable "ecr_repository_arns" {
+  description = "ARNs de repositorios ECR para push desde CI"
+  type        = list(string)
+  default     = []
 }
