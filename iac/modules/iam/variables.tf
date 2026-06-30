@@ -14,22 +14,32 @@ variable "tags" {
   default     = {}
 }
 
-variable "event_bus_arn" {
-  description = "ARN del custom EventBridge bus"
+variable "event_source" {
+  description = "Source de eventos publicados (debe coincidir con packages/events)"
   type        = string
+  default     = "distrinorte"
 }
 
-variable "inventory_work_queue_arn" {
-  description = "ARN cola SQS inventory-work"
-  type        = string
+variable "message_retention_seconds" {
+  description = "Retencion de mensajes en colas principales"
+  type        = number
+  default     = 345600
 }
 
-variable "orders_events_queue_arn" {
-  description = "ARN cola SQS orders-events"
-  type        = string
+variable "dlq_message_retention_seconds" {
+  description = "Retencion de mensajes en DLQs"
+  type        = number
+  default     = 1209600
 }
 
-variable "products_table_arn" {
-  description = "ARN tabla DynamoDB products"
-  type        = string
+variable "visibility_timeout_seconds" {
+  description = "Visibility timeout de las colas (>= tiempo maximo de procesamiento del consumer)"
+  type        = number
+  default     = 60
+}
+
+variable "max_receive_count" {
+  description = "Recepciones antes de enviar mensaje a DLQ"
+  type        = number
+  default     = 5
 }
