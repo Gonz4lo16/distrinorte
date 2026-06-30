@@ -80,6 +80,7 @@ output "redis_port" {
   description = "Puerto Redis"
   value       = module.elasticache.port
 }
+
 output "event_bus_arn" {
   description = "ARN del EventBridge bus"
   value       = module.messaging.event_bus_arn
@@ -94,6 +95,7 @@ output "orders_events_queue_url" {
   description = "URL cola orders-events"
   value       = module.messaging.orders_events_queue_url
 }
+
 output "ecs_task_execution_role_arn" {
   description = "ECS task execution role"
   value       = module.iam.ecs_task_execution_role_arn
@@ -118,6 +120,7 @@ output "ecs_cluster_arn" {
   description = "ARN del cluster ECS"
   value       = module.ecs_cluster.cluster_arn
 }
+
 output "alb_arn" {
   description = "ARN del ALB interno"
   value       = module.alb.alb_arn
@@ -147,10 +150,12 @@ output "customers_target_group_arn" {
   description = "Target group ARN de customers-service"
   value       = module.alb.customers_target_group_arn
 }
+
 output "customers_service_name" {
   description = "Nombre del ECS service customers-service"
   value       = module.customers_service.service_name
 }
+
 output "inventory_service_name" {
   description = "Nombre del ECS service inventory-service"
   value       = module.inventory_service.service_name
@@ -160,7 +165,28 @@ output "orders_service_name" {
   description = "Nombre del ECS service orders-service"
   value       = module.orders_service.service_name
 }
+
 output "catalog_service_name" {
   description = "Nombre del ECS service catalog-service"
   value       = module.catalog_service.service_name
+}
+
+output "cognito_user_pool_id" {
+  description = "ID del Cognito User Pool"
+  value       = module.cognito.user_pool_id
+}
+
+output "cognito_app_client_id" {
+  description = "Client ID del SPA Cognito"
+  value       = module.cognito.app_client_id
+}
+
+output "cognito_hosted_ui_base_url" {
+  description = "URL base OAuth / hosted UI Cognito"
+  value       = module.cognito.hosted_ui_base_url
+}
+
+output "cognito_issuer_url" {
+  description = "Issuer URL para JWT"
+  value       = module.cognito.issuer_url
 }
