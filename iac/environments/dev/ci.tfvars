@@ -59,7 +59,7 @@ cognito_callback_urls = ["https://pedidos.galaxymorph.com/callback"]
 cognito_logout_urls   = ["https://pedidos.galaxymorph.com/"]
 
 enable_github_actions_oidc       = true
-github_repository                = "jeancdevx/distrinorte"
+github_repository                = "Gonz4lo16/distrinorte"
 github_oidc_branches             = ["develop", "production"]
 github_oidc_environments         = ["dev"]
 github_actions_attach_power_user = true
