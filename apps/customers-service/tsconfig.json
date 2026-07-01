@@ -1,7 +1,7 @@
 {
   "extends": "@distrinorte/config/tsconfig.nest.json",
   "compilerOptions": {
-     "paths": {
+    "paths": {
       "@/*": ["./src/*"]
     },
     "outDir": "dist",
