@@ -1,49 +1,30 @@
-export type PaginationQuery = {
-  page?: number
-  limit?: number
-}
+locals {
+  name_prefix = "${var.project_name}-${var.environment}"
 
-export type PaginatedResult<T> = {
-  data: T[]
-  page: number
-  limit: number
-  total: number
-  totalPages: number
-}
-
-export const DEFAULT_PAGE = 1
-export const DEFAULT_LIMIT = 20
-export const MAX_LIMIT = 100
-
-export function normalizePagination(query: PaginationQuery): {
-  page: number
-  limit: number
-  skip: number
-} {
-  const page =
-    query.page && query.page > 0 ? Math.floor(query.page) : DEFAULT_PAGE
-  const rawLimit =
-    query.limit && query.limit > 0 ? Math.floor(query.limit) : DEFAULT_LIMIT
-  const limit = Math.min(rawLimit, MAX_LIMIT)
-
-  return {
-    page,
-    limit,
-    skip: (page - 1) * limit
-  }
-}
-
-export function toPaginatedResult<T>(
-  data: T[],
-  total: number,
-  page: number,
-  limit: number
-): PaginatedResult<T> {
-  return {
-    data,
-    page,
-    limit,
-    total,
-    totalPages: total === 0 ? 0 : Math.ceil(total / limit)
+  services = {
+    orders = {
+      port              = 3001
+      path_patterns     = ["/orders", "/orders/*"]
+      priority          = 100
+      health_check_path = "/orders/health"
+    }
+    inventory = {
+      port              = 3002
+      path_patterns     = ["/inventory", "/inventory/*"]
+      priority          = 200
+      health_check_path = "/inventory/health"
+    }
+    catalog = {
+      port              = 3003
+      path_patterns     = ["/catalog", "/catalog/*"]
+      priority          = 300
+      health_check_path = "/catalog/health"
+    }
+    customers = {
+      port              = 3004
+      path_patterns     = ["/customers", "/customers/*"]
+      priority          = 400
+      health_check_path = "/customers/health"
+    }
   }
 }
