@@ -1,13 +1,13 @@
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 
 import {
-  createCustomersPrismaClient,
+  createInventoryPrismaClient,
   type PrismaClient
-} from '@distrinorte/database/customers'
+} from '@distrinorte/database/inventory'
 
 @Injectable()
 export class PrismaService implements OnModuleInit, OnModuleDestroy {
-  readonly db: PrismaClient = createCustomersPrismaClient()
+  readonly db: PrismaClient = createInventoryPrismaClient()
 
   async onModuleInit(): Promise<void> {
     await this.db.$connect()
