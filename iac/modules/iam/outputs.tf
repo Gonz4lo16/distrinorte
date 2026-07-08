@@ -27,12 +27,13 @@ output "catalog_task_role_arn" {
   description = "Task role ARN de catalog-service"
   value       = aws_iam_role.catalog_service.arn
 }
+
 output "seed_runner_task_role_arn" {
   description = "Task role ARN de seed-runner"
   value       = aws_iam_role.seed_runner.arn
 }
 
-output "github_actions_role_arn" {
-  description = "ARN del rol OIDC para GitHub Actions (null si deshabilitado)"
-  value       = try(aws_iam_role.github_actions[0].arn, null)
+output "invoice_worker_role_arn" {
+  description = "Execution role ARN del invoice-worker Lambda"
+  value       = try(aws_iam_role.invoice_worker[0].arn, null)
 }
