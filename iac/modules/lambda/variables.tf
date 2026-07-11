@@ -56,6 +56,7 @@ variable "allow_placeholder_zip" {
   type        = bool
   default     = false
 }
+
 variable "handler" {
   description = "Handler del Lambda"
   type        = string
