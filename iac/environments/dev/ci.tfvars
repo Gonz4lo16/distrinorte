@@ -22,7 +22,7 @@ dynamodb_billing_mode        = "PAY_PER_REQUEST"
 dynamodb_enable_pitr         = false
 dynamodb_deletion_protection = false
 
-db_engine_version               = "17.7"
+db_engine_version               = "17.9"
 db_instance_class               = "db.t4g.medium"
 db_allocated_storage            = 20
 db_max_allocated_storage        = 100
@@ -63,12 +63,12 @@ enable_custom_domain = false
 # cognito_logout_urls   = ["https://pedidos.galaxymorph.com/"]
 
 enable_github_ci             = true
-github_repository            = "jeancdevx/distrinorte"
+github_repository            = "Gonz4lo16/distrinorte"
 github_environment           = "dev"
 github_create_oidc_provider  = true
 github_terraform_grant_admin = true
 
-observability_alarm_email = "jcode2006@gmail.com"
+observability_alarm_email = "gonzaloperedaobando@gmail.com"
 
 tags = {
   ManagedBy = "terraform"
